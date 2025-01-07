@@ -32,7 +32,11 @@ private:
     explicit QSpdLogger(QObject *parent = nullptr);
     ~QSpdLogger();
     static QSpdLogger* self;
+#if defined(QT_NO_DEBUG)
+    QString logPattern = "(%Y-%m-%d %T:%f) [%10t] [%^%10l%$] %v";
+#else
     QString logPattern = "(%Y-%m-%d %T:%f) [%10t] [%^%10l%$] [%s:%#:%!] %v";
+#endif
 
 public:
     static  QSpdLogger* Instance();

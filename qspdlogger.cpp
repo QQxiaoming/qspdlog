@@ -89,6 +89,7 @@ void QSpdLogger::installMessageHandler() {
 void QSpdLogger::uninstallMessageHandler() {
     qInstallMessageHandler(nullptr);
     spdlog::drop_all();
+    spdlog::shutdown();
 }
 
 int QSpdLogger::addFileSink(QString filename, uint32_t max_size, uint32_t max_files) {

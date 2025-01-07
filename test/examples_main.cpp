@@ -84,5 +84,7 @@ int main(int argc, char *argv[])
     qCritical().noquote() << "Hello World!";
     //qFatal().noquote() << "Hello World!";
  
-    return app.exec();
+    int ret = app.exec();
+    QSpdLogger::Instance()->uninstallMessageHandler();
+    return ret;
 }
