@@ -16,16 +16,16 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QSpdLogger::Instance()->installMessageHandler();
-    QSpdLogger::Instance()->setLogLevel(QtDebugMsg);
+    QSPDLogger->installMessageHandler();
+    QSPDLogger->setLogLevel(QtDebugMsg);
     QString current_date_file_name = QDateTime::currentDateTime().toString("yyyy-MM-dd");
-    QSpdLogger::Instance()->addFileSink(QDir::currentPath()+"/"+current_date_file_name+"/log.txt",1024*1024*20,1000);
+    QSPDLogger->addFileSink(QDir::currentPath()+"/"+current_date_file_name+"/log.txt",1024*1024*20,1000);
 
     QMainWindow *mainWindow = new QMainWindow();
     QTextEdit *textEdit = new QTextEdit(mainWindow);
     textEdit->setReadOnly(true);
     textEdit->setWordWrapMode(QTextOption::NoWrap);
-    QSpdLogger::Instance()->addQTextEditSink(textEdit, 4096, true, true);
+    QSPDLogger->addQTextEditSink(textEdit, 4096, true, true);
     QComboBox *comboBox = new QComboBox(mainWindow);
     comboBox->addItem("QtDebugMsg");
     comboBox->addItem("QtInfoMsg");
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
             {"QtCriticalMsg", QtCriticalMsg},
             {"QtFatalMsg"   , QtFatalMsg},
         };
-        QSpdLogger::Instance()->setQTextEditSinkLogLevel(textEdit, level_map[str]);
+        QSPDLogger->setQTextEditSinkLogLevel(textEdit, level_map[str]);
     });
     QPushButton *sendLog = new QPushButton(mainWindow);
     sendLog->setText("Send Log");
@@ -85,6 +85,6 @@ int main(int argc, char *argv[])
     //qFatal().noquote() << "Hello World!";
  
     int ret = app.exec();
-    QSpdLogger::Instance()->uninstallMessageHandler();
+    QSPDLogger->uninstallMessageHandler();
     return ret;
 }

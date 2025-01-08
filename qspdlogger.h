@@ -77,4 +77,6 @@ private:
     };
 };
 
+#define QSPDLogger    QSpdLogger::Instance()
+
 #endif // QSPDQSpdLogger_H
